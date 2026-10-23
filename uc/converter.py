@@ -15,7 +15,7 @@ class Unit:
         dimension: Dimension group (e.g., "length", "mass", "temperature").
     """
     name: str
-    dimension: str  # e.g., "length", "mass", "temperature"
+    dimension: str
 
 
 @dataclass(frozen=True)

@@ -10,15 +10,21 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: "ubuntu-latest"
+
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+        tests-level: ["unit", "integration", "system"]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: |
@@ -31,4 +37,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest
+          pytest tests/${{ matrix.tests-level }}
